@@ -1,0 +1,39 @@
+#include <math.h>
+#include <stdio.h>
+int main(void)
+{ 
+    double y,c,x;        
+    for(x=0.1; x<=1; x+=0.1) {
+       y=pow(3,x);
+       printf("x is - %.1f ", x);
+       printf("y(x) is - %.10f ", y);
+       double z=1; 
+       int f=1;/* f uses for creating factorial*/
+       double a=1; /* a uses for creating power of zminna*/ 
+       double s1=1;/* s1 is sum of n elementiv*/
+       double s2=1;/* s2 is a sum for e>0.0001*/
+       for( int n=1; n<=10; n++) {
+            c = pow(log(3),n);
+            f = f*n;
+            a=pow(x,n);
+            z=(c*a)/f;
+
+            s1+=z; 
+            }
+        printf("Sum 1 is - %.10f ", s1); 
+        f = 1;
+        int n=1;
+        do {
+             c = pow(log(3),n);
+             f = f*n;
+             a=pow(x,n);
+             z=(c*a)/f;
+             s2+=z;  
+             n++;          
+            }
+        while(z>0.0001);
+            
+        printf("Sum 2 is - %5f\n ",s2);                
+                                }
+             
+}
