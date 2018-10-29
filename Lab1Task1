@@ -1,0 +1,14 @@
+#include<math.h>
+#include<stdio.h>
+int main(void)
+{
+double a = 1000;
+double b = 0.0001;
+double c = pow(a,2);
+double d = pow(b,2);
+double e = 2*a*b;
+float rezF=(pow((a+b),2)-(c+e))/d;
+printf("Result is : %.25f\n",rezF); 
+double rezD=(pow((a+b),2)-(c+e))/d;
+printf("Result is : %.25f\n", rezD); 
+}
