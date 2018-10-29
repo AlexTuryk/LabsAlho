@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <cs50.h>
+int main(void)
+{
+printf("Give me a first int \n");
+int m =GetInt();
+printf("Give me a second int \n");
+int n =GetInt();
+            /*int r=n+++m;
+            printf("r = %d\n", r); */   /*Task1*/
+            
+            /*int r=m-->n;
+            printf("r = %d\n", r);  */ /*Task2*/
+            
+            /*int r=n-->m;
+             printf("r = %d\n", r); */ /*Task3*/
+             
+ printf("m= %d\n", m);
+ printf("n= %d\n", n);
+}
