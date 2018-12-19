@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<cs50.h>
+#include<string.h>
+void function( int len, int lin, char arr[len][lin])
+{
+    for(int i=0;i<len;i++)
+        {
+        for(int j=0;j<lin;j++)
+            {
+            if( j==0)
+            printf("(");
+            if(arr[i][j]=='0' && j!=0)   
+            arr[i][j]=',';
+            if(j==lin-1 && arr[i][j]==',') 
+            arr[i][j]=')';
+            printf("%c",arr[i][j]);
+            }
+        }
+}
+int main(void)
+{
+    int length, lines;
+    do                    
+        {
+        printf("Enter number of lines of array ");
+        lines=GetInt();
+        }
+    while (lines<=0);
+    do                    
+        {
+        printf("Enter length of array ");
+        length=GetInt();
+        }
+    while (length<=0);
+    
+    char array[length][lines];
+    printf("Input array\n");
+    for(int i=0;i<length; i++)
+        {
+        for(int j=0;j<lines; j++)
+            {
+            printf("array[%d][%d]= ",i,j);
+            array[i][j]=GetChar();
+            }    
+        }
+    function( length, lines, array);
+}
+
