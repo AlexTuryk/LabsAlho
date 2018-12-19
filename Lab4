@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+int main (void)  {
+
+int length, m[100], k;
+    do{
+        printf("Input length of array "); 
+        scanf("%i", &length);
+        }
+    while (length<1 || length >100);
+
+    for(int i=0; i<length; i++){  
+            m[i]= rand()%10;        
+            }
+    
+        for(int i=0; i<length; i++)  
+            printf("m[%d]=%d\n",i, m[i]);                            
+            printf("\n");
+
+    do
+    {
+    printf("Input number of element to destroy ");
+    scanf("%i", &k);
+    }
+    while((k<0)|| (k>=length));
+    printf("Array after first change : \n");
+    
+    for(int i=0; i<length; i++)
+        {
+        if ((i==k)&&(i!=length-1))
+            {
+            for(int i=k; i<length; i++)
+                {
+                 m[i]=m[i+1]; 
+                }
+            }              
+        }
+    for(int i=0; i<length-1; i++)   printf("m[%d]=%d \n",i,m[i]);                         
+    printf("\n"); 
+    
+    printf("Array after second change :\n");
+    int b=0;
+    
+    for(int i=0;i<length; i++)
+        {
+        if(m[i]%2==0)
+                {
+                b++;
+                }
+         }
+        int m1[length+b];
+        int t=0;
+          
+          for(int i=0;i<length; i++)
+        {
+                m1[i+t]=m[i];
+                if(m[i]%2==0)
+                   {
+                    t++;
+                    m1[i+t]=0;
+                   }             
+         }
+         
+        for(int i=0;i<length+b-2; i++)
+           {
+           printf("m1[%d]=%d\n",i,m1[i]);
+          }
+
+}
