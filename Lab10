@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+typedef struct {
+	int arrlen;
+	int number_todelete;
+	int add_number;
+	int add_value;
+}sets;
+
+sets* getSettings();
+void delete_element(int *arr, sets *settings);
+void fill_random_numbers(int *arr, int arrlen);
+void add_element(int *arr, sets *settings);
+
+int main()
+{
+	srand(time(NULL)); //array fills by random numbers and each time is different
+	sets *settings = getSettings();
+	int *arr = malloc(sizeof(int)*settings->arrlen); //memory allocation
+	fill_random_numbers(arr, settings->arrlen);   // -> means link on structure
+	delete_element(arr, settings);
+	add_element(arr, settings);
+}
+
+sets* getSettings() {
+	sets *i = malloc(sizeof(sets));
+
+	fprintf(stdout, "Input length of array: ");
+	scanf("%d", &(i->arrlen));
+
+	fprintf(stdout, "Number to delete: ");
+	scanf("%d", &(i->number_todelete));
+	
+	fprintf(stdout, "Input number element after what we add ");
+	scanf("%d", &(i->add_number));
+	
+	fprintf(stdout, "Input value of element to add ");
+	scanf("%d", &(i->add_value));
+	return i;  // i uses for size of dynamic array
+}
+void fill_random_numbers(int *arr, int arrlen) {
+	for (int i = 0; i < arrlen; i++) {
+		arr[i] = rand() % 99;
+		fprintf(stdout, "arr[%d] = %d\n", i, arr[i]);
+	}
+}
+void delete_element(int *arr, sets *settings) {
+	fprintf(stdout, "Purging %d element\n", settings->number_todelete);
+	int *tmp = malloc(sizeof(int)*settings->arrlen);
+	int i = 0, j = 0;
+	do {
+		if (i != settings->number_todelete) {
+			tmp[j] = arr[i];
+			fprintf(stdout, "new arr[%d] = %d\n", j, tmp[j]);
+			i++; j++;
+		}
+		else
+			i++;
+	} while (i < settings->arrlen);
+}
+
+void add_element(int *arr, sets *settings)
+{
+fprintf(stdout,"Adding %d element with value %d \n",settings->add_number, settings->add_value);
+int *tmp = malloc(sizeof(int)*settings->arrlen);
+	int i = 0, j = 0;
+	do {
+		    if (i != settings->add_number) 
+		    {
+			    tmp[j] = arr[i];
+			    fprintf(stdout, "new arr[%d] = %d\n", j, tmp[j]);
+			    i++; j++;
+		    }
+	        else
+	        {
+	            tmp[j]=arr[i];
+	            tmp[j+1]= settings->add_value;
+	            fprintf(stdout, "new arr[%d]= %d\n",j, tmp[j]);
+	            fprintf(stdout, "new arr[%d]= %d\n",j+1,tmp[j+1]);
+	            i++; j+=2;
+	        }
+	    }
+	while (i < settings->arrlen);
+	
+
+}
