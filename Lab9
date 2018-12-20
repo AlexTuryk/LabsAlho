@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+void write_file ();
+void copy_file();
+void size();
+int main ()
+{
+    FILE *f;
+    FILE *fc;
+    int q;
+    char * filename = "F1.txt";
+    fc = fopen("F2.txt", "wt");
+    f = fopen("F1.txt", "rt");
+    printf ("Input number of raws\n");
+    scanf ("%d", &q);
+    write_file(filename, f, fc, q);
+    copy_file(filename, f, fc, q);
+    size(f,fc);
+    fclose(f);
+    fclose(fc);
+    return 0;
+}
+void write_file(char* filename, FILE *f, FILE *fc, int q) //char * filename - adress from what we write in a file
+{
+    f = fopen(filename, "rt");
+    int i;
+    if  ((f = fopen(filename, "wt")) != NULL )
+    {
+        printf ("The file was successfully created!\n\n");
+    }
+    else
+    {
+        fprintf(stderr, "Error!!!\n");
+    }
+    printf ("File contents: \n");
+    for (i=0; i<q+1; i++)
+    {
+        char text [512];
+        fgets (text, 512, stdin);
+        fprintf (f, "%s", text);
+    }
+    fclose(f);
+}
+void copy_file (char* filename, FILE *f, FILE *fc, int q)
+{
+    int col = 512*q; //512 * number of raws
+    char arr[col];
+    fc = fopen("F2.txt", "wt");
+    f = fopen(filename, "rt");
+    if ( (f != NULL) && (fc != NULL) )
+    {
+    int i=0;
+    fseek(f, 0, SEEK_SET);  //we come on the start of file
+    while (fgets(arr,512,f)!=NULL) //if file is not empty
+        {
+        i++;
+        if ( i%2!=0)
+            {
+            fputs(arr,fc); //we copy lines with index %2!=0
+            }
+        }
+        if (!feof(fc))
+        printf ("\nFile copied\n");
+        else
+        printf("\nError!!!\n");
+     }   
+    fclose(f);
+    fclose(fc);
+       
+}
+void size(FILE* f, FILE* fc)
+{
+    f = fopen("F1.txt", "rt");
+    fc = fopen("F2.txt", "rt");
+    int i=0;
+    int j=0;
+    fseek(f, 0, SEEK_SET);
+    while (fgetc(f)!=EOF)  //EOF - end of file
+        {
+        printf("%c",fgetc(f));
+        i++;
+        }
+    printf(" i is %i\n",i);
+    printf("Size of file F1 is %i\n", i*sizeof(char)); //number of symbols * sizeof(type of file)
+    while (fgetc(fc)!=EOF)
+        {
+        printf("%c",fgetc(fc));
+        j++;
+        }
+    printf(" j is %i\n",j);
+    printf("Size of file F2 is %i\n", j*sizeof(char));
+    fclose(f);
+    fclose(fc);
+        
+}
