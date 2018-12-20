@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<cs50.h>
+#include<string.h>
+char* Gets(char* text)
+{
+text = GetString();
+    
+    if(strlen(text) > 255)
+    {
+        text = "EROR";
+        return text;
+    }
+    return text; 
+}
+
+void function( char* arr)
+    {
+    int b=strlen(arr);
+    int k=0;
+    int i,j;
+    for( i=0, j=b-1 ; i <= b && j >=0; i++, j--)
+        {
+         if(arr[i]==arr[j])
+                k++;   
+        }
+        if(k==b)
+        printf("Word is palindrom\n");
+        else
+        printf("Word is not palindrom\n");          
+        
+    }
+    
+int main(void)
+{
+    printf("Print text : ");
+    char* text = NULL;
+    text = Gets(text);
+    function(text);
+}
