@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <string.h>
+#include <cs50.h>
+#include<ctype.h>
+
+typedef struct 
+{
+string pib;    
+string b;        //birthyear
+string m;      //marks
+string am;  //average mark of atestat
+}
+Abiturient;
+int main (void)
+{
+    
+    printf("Input number of abiturients ");
+    int n=GetInt();
+    Abiturient Point[n];
+    
+    for (int i=0; i<n; i++)
+        {
+        printf("Input pib ");
+        Point[i].pib=GetString();
+        printf("Input birthyear ");
+        Point[i].b=GetString();
+        printf("Input marks ");
+        Point[i].m=GetString();
+        printf("Input average mark ");
+        Point[i].am=GetString();
+        }
+     FILE *fp;
+     fp=fopen("text.txt","w+");
+     if(fopen("text.txt","w+")==NULL)
+        printf("Error in opening file...\n");
+     for (int i=0; i<n; i++)
+        {
+        fprintf(fp,"Person #%i\n PIB : %s\n Birthyear : %s\n Marks : %s\n Average mark %s\n\n", i, Point[i].pib, Point[i].b, Point[i].m, Point[i].am);
+        }
+      fclose(fp); 
+      int k;
+      FILE *fp1;
+      fp1=fopen("text-1.txt","w+");
+      if(fopen("text-1.txt","w+")==NULL)
+        printf("Error in opening file...\n");
+        
+      do  {
+            printf("Input number of student to delete ");
+            k=GetInt();
+            }
+      while (k<0 || k>=n);
+      
+      for(int i=0; i<n-1; i++)
+            {
+            if(i==k)
+            Point[i].pib=Point[i+1].pib;
+            Point[i].b=Point[i+1].b;
+            Point[i].m=Point[i+1].m;
+            Point[i].am=Point[i+1].am;
+            fprintf(fp1,"Person #%i\n PIB : %s\n Birthyear : %s\n Marks : %s\n Average mark %s\n\n", i+1, Point[i].pib, Point[i].b, Point[i].m, Point[i].am);
+            }
+       fclose(fp1); 
+       
+       int p;    
+       FILE *fp2;
+       fp2=fopen("text-2.txt","a+");     
+       printf("Input index of element after what we must to add element ");
+       p=GetInt();
+       fseek(fp, 0, SEEK_SET);
+       Abiturient add;
+       for (int i=0; i<n; i++)
+            {
+               if(i<=p)
+                    {
+                fprintf(fp2,"Person #%i\n PIB : %s\n Birthyear : %s\n Marks : %s\n Average mark %s\n\n", i, Point[i].pib, Point[i].b, Point[i].m, Point[i].am);
+                }
+                if (i==p)
+                    {
+                    printf("Input pib of new element ");
+                    add.pib=GetString();
+                    printf("Input birthyear ");
+                    add.b=GetString();
+                    printf("Input marks ");
+                    add.m=GetString();
+                    printf("Input average mark ");
+                    add.am=GetString();
+                    fprintf(fp2,"Person #%i\n PIB : %s\n Birthyear : %s\n Marks : %s\n Average mark %s\n\n", i, add.pib, add.b, add.m, add.am);
+                    }
+                 if(i>p)
+                    {
+                    fprintf(fp2,"Person #%i\n PIB : %s\n Birthyear : %s\n Marks : %s\n Average mark %s\n\n", i, Point[i-1].pib, Point[i-1].b, Point[i-1].m, Point[i-1].am);
+                    }
+        }
+     fclose(fp2); 
+}
